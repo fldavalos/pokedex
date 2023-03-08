@@ -1,4 +1,3 @@
-import 'package:pokedex/data/repository/repository.dart';
 import 'package:pokedex/data/repository/repository_impl.dart';
 
 import '../entities/pokemon.dart';
