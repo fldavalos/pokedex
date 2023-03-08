@@ -1,32 +1,53 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex/domain/usecases/pokemon_usecases.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pokedex/presentation/bloc/pokemons_bloc.dart';
+
+import 'package:pokedex/presentation/widgets/custom_button.dart';
+import 'package:pokedex/presentation/widgets/error_message.dart';
+import 'package:pokedex/presentation/widgets/pokemon_list.dart';
 
 class PokemonHome extends StatelessWidget {
   const PokemonHome({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final usecases = PokemonUsecases();
     return Scaffold(
-      body: FutureBuilder(
-        initialData: const [],
-        future: usecases.getPokemons(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return ListView.builder(
-              itemCount: usecases.pokemonList.length,
-              itemBuilder: (context, index) {
-                final pokemon = usecases.pokemonList[index];
-                return ListTile(
-                  title: Text(pokemon.name),
-                  subtitle: Text(pokemon.url),
-                );
-              },
-            );
-          } else {
-            return Container();
-          }
-        },
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 30.0),
+        child: Column(
+          children: [
+            Expanded(
+              child: Center(
+                child: BlocBuilder<PokemonsBloc, PokemonsState>(
+                  builder: (context, state) {
+                    if (state is PokemonsInitial) {
+                      return const Text("Please press the button");
+                    } else if (state is PokemonsLoadingState) {
+                      return const CircularProgressIndicator();
+                    } else if (state is PokemonsLoadedState) {
+                      return PokemonList(pokemonsList: state.pokemons);
+                    } else if (state is PokemonsErrorState) {
+                      return ErrorMessage(
+                        message: state.message,
+                      );
+                    }
+                    return Container(
+                      color: Colors.black26,
+                    );
+                  },
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 200,
+              child: Center(
+                child: CustomButton(
+                    onTap: () => BlocProvider.of<PokemonsBloc>(context)
+                        .add(GetPokemonsListEvent())),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
