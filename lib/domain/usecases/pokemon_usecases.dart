@@ -1,9 +1,10 @@
 import 'package:pokedex/data/repository/repository.dart';
+import 'package:pokedex/data/repository/repository_impl.dart';
 
 import '../entities/pokemon.dart';
 
 class PokemonUsecases {
-  final repository = PokemonRepository();
+  final repository = PokemonRepositoryImpl();
   List<Pokemon> pokemonList = [];
 
   Future<List<Pokemon>> getPokemons() async {

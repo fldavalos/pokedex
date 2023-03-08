@@ -2,9 +2,11 @@ import 'package:http/http.dart';
 import 'package:pokedex/data/dtos/pokemon_dto.dart';
 import 'package:pokedex/domain/entities/pokemon.dart';
 
-import '../../repository/repository.dart';
+abstract class PokemonApi {
+  Future<List<Pokemon>> getPokemons();
+}
 
-class PokemonRepositoryImpl extends Repository {
+class PokemonApiImpl implements PokemonApi {
   final _client = Client();
 
   @override
