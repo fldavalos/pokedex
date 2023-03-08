@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-// modificaciones para widget testing
-// el boton debe recibir el bloc provider via constructor en el onTap function
 class CustomButton extends StatelessWidget {
   final Function onTap;
 

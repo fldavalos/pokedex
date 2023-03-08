@@ -9,7 +9,6 @@ class PokemonList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 500,
       child: ListView.builder(
         itemCount: pokemonsList.length,
         itemBuilder: (context, index) {

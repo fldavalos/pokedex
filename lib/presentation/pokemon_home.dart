@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex/presentation/bloc/pokemons_bloc.dart';
 
@@ -12,8 +13,11 @@ class PokemonHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: const Text("Pokemon")),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30.0),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 30.0,
+        ),
         child: Column(
           children: [
             Expanded(
@@ -45,7 +49,7 @@ class PokemonHome extends StatelessWidget {
                     onTap: () => BlocProvider.of<PokemonsBloc>(context)
                         .add(GetPokemonsListEvent())),
               ),
-            )
+            ),
           ],
         ),
       ),
