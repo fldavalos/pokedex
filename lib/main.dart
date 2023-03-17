@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex/presentation/bloc/pokemons_bloc.dart';
-import 'package:pokedex/presentation/pokemon_home.dart';
+import 'package:pokedex/presentation/pokedex_home.dart';
+// import 'package:pokedex/presentation/pokemon_home.dart';
 
 void main() {
   runApp(const AppBlocWrapper());
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const PokemonHome(),
+      home: const PokedexHome(),
     );
   }
 }

@@ -12,8 +12,8 @@ class PokemonsBloc extends Bloc<PokemonsEvent, PokemonsState> {
 
   PokemonsBloc() : super(PokemonsInitial()) {
     on<GetPokemonsListEvent>((event, emit) async {
-      PokemonsLoadingState();
       try {
+        emit(PokemonsLoadingState());
         final pokemonList = await pokemonUsecases.getPokemons();
         emit(PokemonsLoadedState(pokemons: pokemonList));
       } catch (e) {
